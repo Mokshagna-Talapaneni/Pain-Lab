@@ -1,6 +1,7 @@
 /* ==========================================================================
    Pain Neuroscience Research Lab — JavaScript
    University of Arizona · College of Nursing
+   Multi-page version
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,17 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.getElementById('navbar');
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
-  const allNavAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-  const sections = document.querySelectorAll('section[id]');
   const contactForm = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
   // -------------------------------------------------------------------------
-  // 1. Sticky Navbar — transparent → solid on scroll
+  // 1. Sticky Navbar — transparent → solid on scroll (home page only)
+  //    On inner pages the navbar uses .navbar-solid class and stays solid.
   // -------------------------------------------------------------------------
+  const isHomePage = navbar && !navbar.classList.contains('navbar-solid');
+
   const handleNavbarScroll = () => {
-    if (!navbar) return;
+    if (!navbar || !isHomePage) return;
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
@@ -32,59 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleNavbarScroll(); // initial check
 
   // -------------------------------------------------------------------------
-  // 2. Smooth Scroll Navigation with navbar offset
-  // -------------------------------------------------------------------------
-  allNavAnchors.forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (!href || href === '#') return;
-
-      e.preventDefault();
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
-      // Close mobile menu if open
-      if (navbar && navbar.classList.contains('nav-open')) {
-        navbar.classList.remove('nav-open');
-        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-      }
-
-      // Scroll with offset for fixed navbar
-      const navHeight = navbar ? navbar.offsetHeight : 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
-
-  // -------------------------------------------------------------------------
-  // 3. Active Nav Link Highlighting via IntersectionObserver
-  // -------------------------------------------------------------------------
-  const activeLinkObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          // Remove active from all
-          allNavAnchors.forEach(a => a.classList.remove('active'));
-          // Add active to matching link
-          const match = document.querySelector(`.nav-links a[href="#${id}"]`);
-          if (match) match.classList.add('active');
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: '-40% 0px -55% 0px', // fires when section is in the middle of viewport
-      threshold: 0,
-    }
-  );
-
-  sections.forEach(section => activeLinkObserver.observe(section));
-
-  // -------------------------------------------------------------------------
-  // 4. Mobile Menu Toggle
+  // 2. Mobile Menu Toggle
   // -------------------------------------------------------------------------
   if (navToggle && navbar) {
     navToggle.addEventListener('click', () => {
@@ -99,10 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.setAttribute('aria-expanded', 'false');
       }
     });
+
+    // Close menu when a nav link is clicked (for mobile)
+    const mobileNavAnchors = document.querySelectorAll('.nav-links a');
+    mobileNavAnchors.forEach(anchor => {
+      anchor.addEventListener('click', () => {
+        if (navbar.classList.contains('nav-open')) {
+          navbar.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
   }
 
   // -------------------------------------------------------------------------
-  // 5 & 7. Scroll Animations + Accessibility (reduced motion)
+  // 3. Scroll Animations + Accessibility (reduced motion)
   // -------------------------------------------------------------------------
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -130,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------------------------
-  // 6. Contact Form Handling
+  // 4. Contact Form Handling (demonstration — no backend)
   // -------------------------------------------------------------------------
   if (contactForm) {
     const nameInput = document.getElementById('contactName');

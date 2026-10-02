@@ -1,6 +1,7 @@
 /* ==========================================================================
    Pain Neuroscience Research Lab — Stylesheet
    University of Arizona · College of Nursing
+   Multi-page version
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -33,6 +34,10 @@
   --color-navy: #1E3A5F;
   --color-navy-light: #2C5282;
   --color-navy-dark: #1A365D;
+
+  /* Warm Accent (Primary Buttons) */
+  --color-warm: #0D9488;
+  --color-warm-hover: #14B8A6;
 
   /* Feedback Colors */
   --color-success: #38A169;
@@ -261,6 +266,18 @@ address {
   transform: translateY(-2px);
 }
 
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--color-gray-600);
+  border: 2px solid var(--color-gray-200);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-400);
+  color: var(--color-gray-800);
+}
+
 .btn-lg {
   padding: 1rem 2.25rem;
   font-size: 1.0625rem;
@@ -307,7 +324,7 @@ address {
 }
 
 /* ==========================================================================
-   1. NAVBAR
+   NAVBAR — Multi-page version
    ========================================================================== */
 .navbar {
   position: fixed;
@@ -318,6 +335,15 @@ address {
   padding: var(--space-4) 0;
   background-color: transparent;
   transition: all var(--transition-base);
+}
+
+/* On non-home pages, navbar is always solid */
+.navbar.navbar-solid {
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-2) 0;
 }
 
 .navbar.scrolled {
@@ -354,7 +380,8 @@ address {
   font-size: 1.5rem;
 }
 
-.navbar.scrolled .nav-logo {
+.navbar.scrolled .nav-logo,
+.navbar.navbar-solid .nav-logo {
   color: var(--color-navy);
 }
 
@@ -387,16 +414,19 @@ address {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.navbar.scrolled .nav-links a {
+.navbar.scrolled .nav-links a,
+.navbar.navbar-solid .nav-links a {
   color: var(--color-gray-600);
 }
 
-.navbar.scrolled .nav-links a:hover {
+.navbar.scrolled .nav-links a:hover,
+.navbar.navbar-solid .nav-links a:hover {
   color: var(--color-teal);
   background-color: var(--color-gray-50);
 }
 
-.navbar.scrolled .nav-links a.active {
+.navbar.scrolled .nav-links a.active,
+.navbar.navbar-solid .nav-links a.active {
   color: var(--color-teal);
   background-color: var(--color-blue-50);
 }
@@ -434,7 +464,8 @@ address {
   transition: all var(--transition-base);
 }
 
-.navbar.scrolled .hamburger-line {
+.navbar.scrolled .hamburger-line,
+.navbar.navbar-solid .hamburger-line {
   background-color: var(--color-navy);
 }
 
@@ -452,7 +483,51 @@ address {
 }
 
 /* ==========================================================================
-   2. HERO SECTION
+   PAGE HEADER — Banner for inner pages (not home)
+   ========================================================================== */
+.page-header {
+  background: linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 40%, var(--color-navy-light) 70%, var(--color-teal-dark) 100%);
+  padding: calc(var(--navbar-height) + var(--space-16)) var(--space-6) var(--space-12);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-teal), var(--color-blue-200), var(--color-teal));
+}
+
+.page-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header .section-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.page-header h1 {
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.page-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   HERO SECTION (Home page only)
    ========================================================================== */
 .hero {
   position: relative;
@@ -532,7 +607,107 @@ address {
 }
 
 /* ==========================================================================
-   3. ABOUT THE LAB
+   HOME — Preview Cards
+   ========================================================================== */
+.preview-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+.preview-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-100);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.preview-card h3 {
+  margin-bottom: var(--space-3);
+}
+
+.preview-card p {
+  margin-bottom: var(--space-5);
+}
+
+/* Why Participate */
+.why-participate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+.why-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-100);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.why-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-blue-50), var(--color-blue-100));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-4);
+  font-size: 1.5rem;
+  color: var(--color-navy);
+}
+
+.why-card h4 {
+  margin-bottom: var(--space-2);
+}
+
+.why-card p {
+  font-size: 0.9375rem;
+  margin-bottom: 0;
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 50%, var(--color-teal-dark) 100%);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  color: var(--color-white);
+}
+
+.cta-banner h2 {
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+.cta-banner p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.cta-banner .btn {
+  margin: 0 var(--space-2);
+}
+
+/* ==========================================================================
+   ABOUT THE LAB
    ========================================================================== */
 .about {
   background-color: var(--color-off-white);
@@ -576,6 +751,39 @@ address {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* Mission / Vision / Approach cards */
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+
+.approach-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-100);
+  border-top: 4px solid var(--color-teal);
+}
+
+.approach-card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.approach-card h3 i {
+  color: var(--color-teal);
+}
+
+.approach-card p {
+  font-size: 0.9375rem;
+  margin-bottom: 0;
 }
 
 /* ==========================================================================
@@ -700,18 +908,6 @@ address {
   margin-bottom: var(--space-6);
 }
 
-.btn-outline-light {
-  background-color: transparent;
-  color: var(--color-gray-600);
-  border: 2px solid var(--color-gray-200);
-}
-
-.btn-outline-light:hover {
-  background-color: var(--color-gray-50);
-  border-color: var(--color-gray-400);
-  color: var(--color-gray-800);
-}
-
 .pi-research-tags {
   display: flex;
   flex-wrap: wrap;
@@ -736,39 +932,8 @@ address {
   color: var(--color-navy);
 }
 
-/* Team card with real photo */
-.team-photo-real {
-  overflow: hidden;
-}
-
-.team-photo-real img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.team-card-featured {
-  border: 2px solid var(--color-teal);
-  position: relative;
-}
-
-.team-card-featured::before {
-  content: '★ PI';
-  position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
-  background: linear-gradient(135deg, var(--color-teal), var(--color-teal-light));
-  color: var(--color-white);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.05em;
-}
-
 /* ==========================================================================
-   4. OUR RESEARCH / CURRENT STUDIES
+   RESEARCH / CURRENT STUDIES
    ========================================================================== */
 .research {
   background-color: var(--color-white);
@@ -806,6 +971,13 @@ address {
 
 .study-title {
   font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.study-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-teal);
+  font-weight: 600;
   margin-bottom: var(--space-4);
 }
 
@@ -942,7 +1114,7 @@ address {
 }
 
 /* ==========================================================================
-   5. WHAT IS tDCS?
+   WHAT IS tDCS?
    ========================================================================== */
 .tdcs {
   background-color: var(--color-blue-50);
@@ -1011,8 +1183,28 @@ address {
   margin-bottom: 0;
 }
 
+/* tDCS info note */
+.tdcs-note {
+  background: var(--color-off-white);
+  border-left: 4px solid var(--color-teal);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.tdcs-note p {
+  margin-bottom: 0;
+  font-size: 0.9375rem;
+  color: var(--color-gray-600);
+}
+
+.tdcs-note i {
+  color: var(--color-teal);
+  margin-right: var(--space-2);
+}
+
 /* ==========================================================================
-   6. ELIGIBILITY
+   ELIGIBILITY
    ========================================================================== */
 .eligibility {
   background-color: var(--color-white);
@@ -1108,47 +1300,121 @@ address {
   color: var(--color-gray-800);
 }
 
+/* Participation info cards */
+.participation-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.info-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-100);
+}
+
+.info-card h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.info-card h3 i {
+  color: var(--color-teal);
+  font-size: 1.25rem;
+}
+
+.info-card p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-card ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  color: var(--color-gray-600);
+  font-size: 0.9375rem;
+}
+
+.info-card ul li i {
+  color: var(--color-teal);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
 /* ==========================================================================
-   7. MEET THE TEAM
+   TEAM — One Column Layout
    ========================================================================== */
 .team {
   background-color: var(--color-gray-50);
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: var(--space-8);
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .team-card {
   background: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: var(--space-8) var(--space-6);
-  text-align: center;
+  padding: var(--space-8);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--color-gray-100);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
 }
 
 .team-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .team-photo {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--color-blue-50), var(--color-blue-100));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--space-5);
+  flex-shrink: 0;
   border: 4px solid var(--color-white);
   box-shadow: var(--shadow-md);
   color: var(--color-gray-400);
   font-size: 2.5rem;
+  overflow: hidden;
+}
+
+.team-photo-real {
+  overflow: hidden;
+}
+
+.team-photo-real img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.team-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .team-name {
@@ -1168,13 +1434,12 @@ address {
 .team-bio {
   font-size: 0.9375rem;
   color: var(--color-gray-600);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: var(--space-4);
 }
 
 .team-social {
   display: flex;
-  justify-content: center;
   gap: var(--space-3);
 }
 
@@ -1197,8 +1462,27 @@ address {
   transform: translateY(-2px);
 }
 
+.team-card-featured {
+  border: 2px solid var(--color-teal);
+  position: relative;
+}
+
+.team-card-featured::before {
+  content: '★ PI';
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: linear-gradient(135deg, var(--color-teal), var(--color-teal-light));
+  color: var(--color-white);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+}
+
 /* ==========================================================================
-   8. LOCATION & PARKING
+   LOCATION & PARKING
    ========================================================================== */
 .location {
   background-color: var(--color-white);
@@ -1267,7 +1551,7 @@ address {
 }
 
 /* ==========================================================================
-   9. CONTACT / GET INVOLVED
+   CONTACT / GET INVOLVED
    ========================================================================== */
 .contact {
   background-color: var(--color-blue-50);
@@ -1408,7 +1692,7 @@ address {
   min-height: 1.2em;
 }
 
-/* Form Success Message */
+/* Form Success & Error Messages */
 .form-success {
   display: flex;
   align-items: center;
@@ -1436,8 +1720,45 @@ address {
   display: none;
 }
 
+.form-demo-note {
+  background: var(--color-off-white);
+  border-left: 4px solid var(--color-blue-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.form-demo-note p {
+  margin-bottom: 0;
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+}
+
+.form-demo-note i {
+  color: var(--color-blue-200);
+  margin-right: var(--space-2);
+}
+
+.privacy-note {
+  background: var(--color-off-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.privacy-note p {
+  margin-bottom: 0;
+  font-size: 0.8125rem;
+  color: var(--color-gray-600);
+}
+
+.privacy-note i {
+  color: var(--color-gray-400);
+  margin-right: var(--space-2);
+}
+
 /* ==========================================================================
-   10. FOOTER
+   FOOTER
    ========================================================================== */
 .footer {
   background: linear-gradient(180deg, var(--color-navy-dark), #0F2137);
@@ -1615,11 +1936,16 @@ address {
 .highlights-grid .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
 .highlights-grid .animate-on-scroll:nth-child(4) { transition-delay: 300ms; }
 
-.team-grid .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
-.team-grid .animate-on-scroll:nth-child(2) { transition-delay: 80ms; }
-.team-grid .animate-on-scroll:nth-child(3) { transition-delay: 160ms; }
-.team-grid .animate-on-scroll:nth-child(4) { transition-delay: 240ms; }
-.team-grid .animate-on-scroll:nth-child(5) { transition-delay: 320ms; }
+.team-list .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.team-list .animate-on-scroll:nth-child(2) { transition-delay: 80ms; }
+.team-list .animate-on-scroll:nth-child(3) { transition-delay: 160ms; }
+.team-list .animate-on-scroll:nth-child(4) { transition-delay: 240ms; }
+.team-list .animate-on-scroll:nth-child(5) { transition-delay: 320ms; }
+.team-list .animate-on-scroll:nth-child(6) { transition-delay: 400ms; }
+
+.why-participate-grid .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.why-participate-grid .animate-on-scroll:nth-child(2) { transition-delay: 100ms; }
+.why-participate-grid .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
 
 /* ==========================================================================
    RESPONSIVE — Tablet (768px+)
@@ -1646,6 +1972,10 @@ address {
     grid-template-columns: 1fr 1fr;
   }
 
+  .participation-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .location-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1656,6 +1986,10 @@ address {
 
   .footer-grid {
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+
+  .preview-cards {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -1697,6 +2031,11 @@ address {
 
   .nav-links a:hover {
     background: var(--color-gray-50);
+    color: var(--color-teal) !important;
+  }
+
+  .nav-links a.active {
+    background: var(--color-blue-50) !important;
     color: var(--color-teal) !important;
   }
 
@@ -1767,6 +2106,28 @@ address {
   .parking-photos {
     grid-template-columns: 1fr;
   }
+
+  /* Team card stacks on mobile */
+  .team-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .team-photo {
+    margin: 0 auto;
+  }
+
+  .team-info {
+    text-align: center;
+  }
+
+  .team-social {
+    justify-content: center;
+  }
+
+  .page-header {
+    padding: calc(var(--navbar-height) + var(--space-10)) var(--space-6) var(--space-8);
+  }
 }
 
 /* ==========================================================================
@@ -1781,10 +2142,6 @@ address {
     grid-template-columns: 1fr;
   }
 
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
-
   .hero-title {
     font-size: 2rem;
   }
@@ -1796,6 +2153,10 @@ address {
 
   .contact-form-wrapper {
     padding: var(--space-6);
+  }
+
+  .why-participate-grid {
+    grid-template-columns: 1fr;
   }
 }
 
