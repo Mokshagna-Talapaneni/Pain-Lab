@@ -1948,6 +1948,294 @@ address {
 .why-participate-grid .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
 
 /* ==========================================================================
+   Study Detail Cards (Part 4 — Our Studies)
+   ========================================================================== */
+
+/* Coral / Red-Orange accent for section label & select headings */
+.study-details-label {
+  color: #E07A5F !important;
+}
+
+.study-details-section {
+  background: var(--color-off-white);
+}
+
+/* ----- Card container ----- */
+.study-detail-card {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-gray-100);
+  padding: var(--space-10);
+  margin-bottom: 80px;
+  overflow: hidden;
+}
+
+.study-detail-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Highlights & timeline nested inside a study card */
+.study-detail-card .study-highlights-grid {
+  margin-top: var(--space-10);
+}
+
+.study-detail-card .timeline-section {
+  margin-top: var(--space-8);
+}
+
+/* ----- Study title ----- */
+.study-detail-title {
+  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  color: var(--color-navy);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--color-gray-100);
+}
+
+/* ----- Three-column grid ----- */
+.study-detail-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .study-detail-columns {
+    grid-template-columns: 1fr 1.3fr 1fr;
+    align-items: stretch;
+  }
+}
+
+/* ----- Column cards ----- */
+.study-detail-col {
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+}
+
+.study-detail-col--blue {
+  background: #EDF2F7;
+}
+
+.study-detail-col--gray {
+  background: var(--color-gray-50);
+}
+
+.study-detail-col--center {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+}
+
+/* ----- Column headings ----- */
+.study-detail-col-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: var(--space-4);
+}
+
+.study-detail-col-heading--coral {
+  color: #E07A5F;
+}
+
+.study-detail-col-heading-sub {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-gray-400);
+}
+
+/* ----- Bullet lists ----- */
+.study-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.study-detail-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-bottom: var(--space-3);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-gray-600);
+}
+
+.study-detail-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: #E07A5F;
+}
+
+.study-detail-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ----- Outcomes text ----- */
+.study-detail-outcomes {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--color-gray-600);
+  margin-bottom: 0;
+}
+
+/* ----- Flowchart ----- */
+.study-flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--space-6);
+}
+
+.flowchart-step {
+  width: 100%;
+}
+
+.flowchart-box {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-5);
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray-800);
+  line-height: 1.5;
+}
+
+.flowchart-box--highlight {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(30, 58, 95, 0.3);
+}
+
+.flowchart-arrow {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-1) 0;
+  color: var(--color-gray-400);
+  font-size: 0.875rem;
+}
+
+/* ----- Footnotes ----- */
+.study-detail-footnote {
+  font-size: 0.8125rem;
+  color: var(--color-gray-400);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.study-detail-card-footnote {
+  font-size: 0.8125rem;
+  color: var(--color-gray-400);
+  text-align: center;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-gray-100);
+  margin-bottom: 0;
+}
+
+/* ----- Feature cards (Study 2) ----- */
+.study-feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.study-feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  border: 1px solid var(--color-gray-100);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.study-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.study-feature-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.study-feature-icon--blue {
+  background: #E2E8F0;
+  color: var(--color-navy);
+}
+
+.study-feature-icon--gold {
+  background: #FEF3C7;
+  color: #B7791F;
+}
+
+.study-feature-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: var(--space-1);
+}
+
+.study-feature-text p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-gray-600);
+  margin-bottom: 0;
+}
+
+/* ----- Analogy quote box ----- */
+.study-analogy-box {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-left: 4px solid #F59E0B;
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+}
+
+.study-analogy-box p {
+  margin-bottom: 0;
+  font-size: 0.9375rem;
+  color: #92400E;
+  line-height: 1.6;
+}
+
+/* ----- Tablet: two-column fallback (768–1023px) ----- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .study-detail-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .study-detail-col--center {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
    RESPONSIVE — Tablet (768px+)
    ========================================================================== */
 @media (min-width: 768px) {
